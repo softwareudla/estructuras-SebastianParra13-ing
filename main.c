@@ -6,6 +6,7 @@ int main()
     
     int opc;
     int i = 0;
+    
     do
     {
         opc = menu();
