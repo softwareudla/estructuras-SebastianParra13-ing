@@ -2,7 +2,6 @@
 #include <string.h>
 #include "funciones.h"
 
-
 int menu()
 {
 
@@ -83,7 +82,7 @@ void registrarLibros(struct Libro libro[maxlib], int *indice)
 void mostrarLibros(struct Libro libro[maxlib], int *n)
 {
     printf("ID\t\tTitulo\t\tAutor\t\tAnio\t\tEstado\n");
-    for (int i = 0; i < maxlib; i++)
+    for (int i = 0; i < *n; i++)
     {
         if (libro[i].id != 0)
         {
@@ -264,7 +263,7 @@ void eliminarLib(struct Libro libro[maxlib], int *indice)
 {
     int buscarId;
     int encontrado = 0;
-    // Solicitar el ID del libro
+
     while (1)
     {
         printf("Ingresa el ID del libro que deseas eliminar\n");
@@ -274,24 +273,26 @@ void eliminarLib(struct Libro libro[maxlib], int *indice)
         }
         else
         {
-            printf("Entrada no valida. Por favor, ingrese un numero.\n");
+            printf("Entrada no válida. Por favor, ingrese un número.\n");
             while (getchar() != '\n')
                 ; // Limpiar el buffer
         }
     }
+
     for (int i = 0; i < *indice; i++)
     {
         if (libro[i].id == buscarId)
         {
-            libro[i].id = 0;
-            printf("Libro Eliminado");
-            *indice = *indice - 1;
+            // Mover los libros restantes hacia adelante
+            for (int j = i; j < *indice - 1; j++)
+            {
+                libro[j] = libro[j + 1];
+            }
+            libro[*indice - 1].id = 0; // Opcional: limpiar el último libro
+            (*indice)--;               // Decrementar el índice
+            printf("Libro eliminado.\n");
             encontrado = 1;
             break;
-        }
-        else
-        {
-            continue;
         }
     }
 
