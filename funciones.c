@@ -25,7 +25,7 @@ void registrarLibros(struct Libro libro[maxlib], int *indice)
         printf("Ingrese el Id del libro %d\n", *indice + 1);
 
         // Verificamos que se ingrese un número
-        if (scanf("%d", &libro[*indice].id) != 1)
+        if (scanf("%d", &libro[*indice].id) != 1 || (libro[*indice].id <= 0))
         {
             printf("Error: Debe ingresar un numero para el ID.\n");
             idValido = 0; // ID no válido
@@ -61,7 +61,7 @@ void registrarLibros(struct Libro libro[maxlib], int *indice)
     while (1)
     {
         printf("Ingrese el anio del libro %d\n", *indice + 1);
-        if (scanf("%d", &libro[*indice].anio) == 1)
+        if (scanf("%d", &libro[*indice].anio) == 1 && (libro[*indice].anio) > 0)
         {
             break; // Salimos del bucle si se ingresó un número
         }
@@ -95,8 +95,21 @@ void buscarLibroID(struct Libro libro[maxlib], int *indice)
 {
     int buscarId;
     int encontrado = 0;
-    printf("Ingresa el ID del libro que deseas buscar\n");
-    scanf("%d", &buscarId);
+    while (1)
+    {
+        printf("Ingresa el ID del libro que deseas buscar\n");
+        if (scanf("%d", &buscarId) == 1 && buscarId > 0) // Verificar que sea un número positivo
+        {
+            break; // Salimos del bucle si se ingresó un número válido
+        }
+        else
+        {
+            printf("Error: Debe ingresar un número positivo para el ID.\n");
+            while (getchar() != '\n') // Limpiar el buffer
+                ;
+        }
+    }
+
     for (int i = 0; i < *indice; i++)
     {
         if (libro[i].id == buscarId)
@@ -199,7 +212,7 @@ void actulizarEstad(struct Libro libro[maxlib], int *indice)
     while (1)
     {
         printf("Ingresa el ID del libro que deseas cambiar el estado\n");
-        if (scanf("%d", &buscarId) == 1)
+        if (scanf("%d", &buscarId) == 1 && buscarId > 0)
         {
             // Si se ingresó un número correctamente, salimos del bucle
             break;
@@ -267,7 +280,7 @@ void eliminarLib(struct Libro libro[maxlib], int *indice)
     while (1)
     {
         printf("Ingresa el ID del libro que deseas eliminar\n");
-        if (scanf("%d", &buscarId) == 1)
+        if (scanf("%d", &buscarId) == 1  && buscarId > 0)
         {
             break; // Salimos del bucle si se ingresó un número
         }
