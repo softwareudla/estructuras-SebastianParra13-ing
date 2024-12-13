@@ -8,6 +8,7 @@ int menu()
     int op;
     printf("\n\t\tMenu\t\t\n");
     printf("1.Registrar libro\n2.Mostrar Lista de libros\n3.Busqueda de libro\n4.Actualizar estado del libro\n5.Eliminar Libro\n6.Salir\n");
+    printf("---------------------------------------------------------------------------------------------------------------\n");
     scanf("%d", &op);
 
     return op;
@@ -81,12 +82,31 @@ void registrarLibros(struct Libro libro[maxlib], int *indice)
 
 void mostrarLibros(struct Libro libro[maxlib], int *n)
 {
-    printf("ID\t\tTitulo\t\tAutor\t\tAnio\t\tEstado\n");
+    // Ordenar los libros por ID usando el algoritmo de burbuja
+    for (int i = 0; i < *n - 1; i++)
+    {
+        for (int j = 0; j < *n - i - 1; j++)
+        {
+            if (libro[j].id > libro[j + 1].id)
+            {
+                // Intercambiar los libros
+                struct Libro temp = libro[j];
+                libro[j] = libro[j + 1];
+                libro[j + 1] = temp;
+            }
+        }
+    }
+
+    // Encabezados de la tabla
+    printf("%-5s | %-20s | %-20s | %-5s | %-10s\n", "ID", "Titulo", "Autor", "Anio", "Estado");
+    printf("-------------------------------------------------------------------\n");
+    
+    // Mostrar los libros
     for (int i = 0; i < *n; i++)
     {
         if (libro[i].id != 0)
         {
-            printf("%d\t\t%s\t\t%s\t\t%d\t\t%s\n", libro[i].id, libro[i].titulo, libro[i].Autor, libro[i].anio, libro[i].Estado);
+            printf("%-5d | %-20s | %-20s | %-5d | %-10s\n", libro[i].id, libro[i].titulo, libro[i].Autor, libro[i].anio, libro[i].Estado);
         }
     }
 }
