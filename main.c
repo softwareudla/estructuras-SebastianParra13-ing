@@ -3,7 +3,7 @@
 
 int main()
 {
-    
+    struct Libro libros[maxlib];
     int opc;
     int i = 0;
     

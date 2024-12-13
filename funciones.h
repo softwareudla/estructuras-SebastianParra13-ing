@@ -8,7 +8,7 @@ struct Libro
     int anio;
     char Estado[10];
 };
-struct Libro libros[maxlib];
+
 int menu();
 void actulizarEstad(struct Libro libro[maxlib], int *indice);
 void registrarLibros(struct Libro libro[maxlib], int *indice);

@@ -209,11 +209,11 @@ void buscarLibro(struct Libro libro[maxlib], int *indice)
     {
     case 1:
         printf("Medio de busqueda: ID\n");
-        buscarLibroID(libros, indice);
+        buscarLibroID(libro, indice);
         break;
     case 2:
         printf("Medio de busqueda Titulo\n");
-        buscarLibroTi(libros, indice);
+        buscarLibroTi(libro, indice);
         break;
     default:
         printf("No hay esa opcion\n");
